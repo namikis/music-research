@@ -15,6 +15,15 @@ services:
     volumes:
       - ./go/src:/workspace
     working_dir: /workspace
+    env_file:
+      - ./.env
+  python:
+    build: ./python
+    volumes:
+      - ./python/src:/var/www/html
+    tty: true
+    env_file:
+      - ./.env
   db-mysql:
     image: mysql:8
     environment:
