@@ -7,6 +7,11 @@ class SpotifyMusic():
         ccm = SpotifyClientCredentials(client_id = os.environ['SPOTIFY_CLIENT_ID'], client_secret = os.environ['SPOTIFY_SECRET_ID'])
         self.spotify = spotipy.Spotify(client_credentials_manager = ccm)
 
+    def preProcess(self, music_data):
+        music_name = music_data['name'].replace("'", " ")
+        artist_name = music_data['artists'][0]['name'].replace("'", " ")
+        return {"music_name": music_name, "artist_name": artist_name}
+
     def getMusics(self):
         all_track_ids = []
         audio_data_list = {}
@@ -18,8 +23,10 @@ class SpotifyMusic():
                 offset = 50 * i
                 results = self.spotify.search(q=search_str, limit=50, offset=offset, type='track', market=None)
                 for result in results['tracks']['items']:
+                    processed_music = self.preProcess(result)
+                    print(processed_music['music_name'], "-", processed_music['artist_name'])
                     all_track_ids.append(result['id'])
-                    audio_data_list[result['id']] = {"music_name":result['name'], "artist_name":result['artists'][0]['name']}
+                    audio_data_list[result['id']] = {"music_name":processed_music['music_name'], "artist_name":processed_music['artist_name']}
         
 
 
@@ -42,11 +49,13 @@ class SpotifyMusic():
         year = "year:2020"
         search_str = "genre:j-pop " + year
             
-        results = self.spotify.search(q=search_str, limit=15, type='track', market=None)
+        results = self.spotify.search(q=search_str, limit=50, type='track', market=None)
 
         for result in results['tracks']['items']:
+            processed_music = self.preProcess(result)
+            print(processed_music['music_name'], "-", processed_music['artist_name'])
             all_track_ids.append(result['id'])
-            audio_data_list[result['id']] = {"music_name":result['name'], "artist_name":result['artists'][0]['name']}
+            audio_data_list[result['id']] = {"music_name":processed_music['music_name'], "artist_name":processed_music['artist_name']}
         
 
 

@@ -3,8 +3,8 @@ from lib.music_feature import SpotifyMusic
 import pprint
 
 spotify_music = SpotifyMusic()
-#musics = spotify_music.getMusics()
-musics = spotify_music.getMusicsSmall()
+musics = spotify_music.getMusics()
+#musics = spotify_music.getMusicsSmall()
 
 # musics = {
 #     "1eGY6roK1W2vFIhDXu2lXq" :{

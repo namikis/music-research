@@ -20,14 +20,20 @@ class DB_CONN:
         with self.conn.cursor() as cursor:
             #sql = "INSERT INTO musics (music_name, valence, energy, music_id) VALUE('test_name2', 1, 2, '123445')"
             sql = "INSERT INTO musics (music_name, valence, energy, music_id, artist_name) VALUE "
+            count = 0
+            #15個ずつISNERT
             for data in data_list.values():
+                count += 1
                 if "valence" in data and "energy" in data:
-                    print(data)
+                    #print(data)
                     sql += "('" + data['music_name'] + "','" + str(data['valence']) + "','" + str(data['energy']) + "','" + data['music_id'] + "','" + data["artist_name"] + "'),"
-            sql = sql.rstrip(',')
-            sql += ";"
-            cursor.execute(sql)
-            self.conn.commit()
+                if count == 50:
+                    sql = sql.rstrip(',') + ";"
+                    print("\n" + sql)
+                    cursor.execute(sql)
+                    sql = "INSERT INTO musics (music_name, valence, energy, music_id, artist_name) VALUE "
+                    count = 0
+        self.conn.commit()
 
     def closeDB(self):
         self.conn.close()
