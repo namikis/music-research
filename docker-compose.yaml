@@ -7,23 +7,25 @@ services:
     volumes:
       - ./nuxt/src:/workspace
     working_dir: /workspace
-  go-back:
-    build: ./go
+  # go-back:
+  #   build: ./go
+  #   tty: true
+  #   ports:
+  #     - 5000:5000
+  #   volumes:
+  #     - ./go/src:/workspace
+  #   working_dir: /workspace
+  #   env_file:
+  #     - ./.env
+  flask:
+    build: ./flask
+    volumes:
+      - ./flask/src:/workspace
     tty: true
+    env_file:
+      - ./.env
     ports:
-      - 5000:5000
-    volumes:
-      - ./go/src:/workspace
-    working_dir: /workspace
-    env_file:
-      - ./.env
-  python:
-    build: ./python
-    volumes:
-      - ./python/src:/var/www/html
-    tty: true
-    env_file:
-      - ./.env
+      - 5000:80
   db-mysql:
     image: mysql:8
     environment:
