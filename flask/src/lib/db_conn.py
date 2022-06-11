@@ -43,7 +43,7 @@ class DB_CONN:
         return result
 
     def getArtists(self):
-        sql = "SELECT artist_name FROM musics"
+        sql = "SELECT DISTINCT(artist_name) FROM musics"
         artists = self.selectSQL(sql)
         self.closeDB()
         return artists
