@@ -68,3 +68,7 @@ class SpotifyMusic():
             audio_data_list[audio_feature['id']]["music_id"] = audio_feature['id']
 
         return audio_data_list
+
+    def searchFormalName(self, search_name):
+        result = self.spotify.search(q=search_name, type='artist', market=None)
+        return result["artists"]["items"][0]["name"]

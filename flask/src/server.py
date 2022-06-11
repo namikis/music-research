@@ -31,5 +31,10 @@ def fusionMusic():
     target_music_features = request.form.get("target_musics")
     return jsonify(mainController.fusionMusic(target_music_features))
 
+@app.route("/artists/formal_name")
+def getFormalName():
+    search_name = request.args.get("search_name", "")
+    return jsonify(mainController.getFormalName(search_name))
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80, debug=True)
