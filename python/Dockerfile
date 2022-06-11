@@ -1,5 +1,0 @@
-FROM python:3.7
-WORKDIR /var/www/html
-EXPOSE 80
-RUN pip install PyMySQL
-RUN pip install spotipy

@@ -14,6 +14,7 @@ class DB_CONN:
                                 password=password,
                                 database=db_name,
                                 charset='utf8mb4',
+                                cursorclass=pymysql.cursors.DictCursor
                                 )
 
     def insertMusic(self, data_list):
@@ -34,6 +35,33 @@ class DB_CONN:
                     sql = "INSERT INTO musics (music_name, valence, energy, music_id, artist_name) VALUE "
                     count = 0
         self.conn.commit()
+
+    def selectSQL(self, sql):
+        with self.conn.cursor() as cursor:
+            cursor.execute(sql)
+            result = cursor.fetchall()
+        return result
+
+    def getArtists(self):
+        sql = "SELECT artist_name FROM musics"
+        artists = self.selectSQL(sql)
+        self.closeDB()
+        return artists
+
+    def getMusicsByArtistName(self, artist_name):
+        sql = "SELECT music_name, valence, energy, artist_name, music_id FROM musics WHERE artist_name= " + artist_name
+        musics = self.selectSQL(sql)
+        self.closeDB()
+        return musics
+
+    def getMusicsByFeature(self, music_feature):
+        param = 0.015
+        valence_range = "valence <= " + str(music_feature["valence"] + param) + "&& valence >= " +str(music_feature["valence"] - param)
+        energy_range = "energy <= " + str(music_feature["energy"] + param) + "&& energy >= " +str(music_feature["energy"] - param)
+        sql = "SELECT music_name, valence, energy, artist_name, music_id FROM musics WHERE " + valence_range + " && " + energy_range
+        musics = self.selectSQL(sql)
+        self.closeDB()
+        return musics
 
     def closeDB(self):
         self.conn.close()
