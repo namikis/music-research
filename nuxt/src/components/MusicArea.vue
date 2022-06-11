@@ -14,6 +14,7 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
+import axios from 'axios'
 export type Music = {
     music_name: string,
     valence: Number,
@@ -61,11 +62,20 @@ export default Vue.extend({
     methods: {
         setTarget(music: Music){
             this.$emit("setTarget", music)
+        },
+        getMusicsByArtistName(){
+            const url = "http://localhost:5000/musics?artist_name='" + this.selected_artist_name + "'"
+            console.log(url)
+            axios.get(url).then((response) => {
+                this.music_list = response.data
+            })
         }
     },
     watch: {
         selected_artist_name: function(){
+            console.log("testes")
             // get musics of artist_name
+            this.getMusicsByArtistName()
         }
     }
 })
@@ -74,6 +84,8 @@ export default Vue.extend({
     .music_area_wrapper{
         background: gray;
         width: 70%;
+        overflow: scroll;
+        height: 100vh;
     }
     .music_field{
         width: 85%;
