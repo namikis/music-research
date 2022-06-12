@@ -43,5 +43,6 @@ export default Vue.extend({
 <style>
   .container{
     display: flex;
+    background: black;
   }
 </style>

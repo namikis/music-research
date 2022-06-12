@@ -13,7 +13,7 @@
     .header_logo h2{
         padding:5px 20px;
         font-size:30px;
-        background: blue;
-        color: white;
+        background: black;
+        color: #00DC82;
     }
 </style>

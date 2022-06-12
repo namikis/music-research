@@ -8,8 +8,10 @@
             {{ target_music.artist_name }}
         </div>
        
-        <div class="fusion_button_wrapper">
-            <span v-if="target_musics.length==2" @click="getFusion">Fusion!</span>    
+        <div>
+            <div class="fusion_button_wrapper" v-if="target_musics.length==2">
+                <span @click="getFusion">Fusion!</span>    
+            </div>
         </div>
     </div>    
 </template>
@@ -48,10 +50,26 @@ export default Vue.extend({
     .fusion_wrapper{
         display: flex;
         padding: 10px;
-        background: lightgray;
+        background: black;
+        opacity: 0.9;
         justify-content: space-evenly;
     }
     .target_item, .fusion_button_wrapper{
         align-items: center;
+        color: white;
+        border: 1px solid white;
+        border-radius: 20px;
+        padding:5px 10px;
+    }
+    .target_item span, .fusion_button_wrapper{
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .fusion_button_wrapper:hover{
+        background: #00DC82;
+        color: black;
+    }
+    .fusion_button_wrapper{
+        color:#00DC82;
     }
 </style>

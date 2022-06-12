@@ -2,10 +2,11 @@
     <div class="music_area_wrapper">
         <div id="music_player_field" class="music_player"></div>
         <div class="music_field">
-            <h3>{{ selected_artist_name }}</h3>
+            <h3 class="selected_artist_name">{{ selected_artist_name }}</h3>
             <div class="music_items">
-                <div class="music_item" v-for="music in music_list" :key="music.music_id">
-                    <p><span @click="setPlayer(music.music_id)"> {{ music.music_name }}</span><span @click="setTarget(music)"> ▲</span> </p>
+                <div class="music_item" v-for="music in music_list" :key="music.music_id" @click="setPlayer(music.music_id)">
+                    <span @click="setTarget(music)"> ▲</span>
+                    <span> {{ music.music_name }}</span>
                 </div>
             </div>
         </div>
@@ -110,20 +111,45 @@ export default Vue.extend({
 </script>
 <style>
     .music_area_wrapper{
-        background: gray;
+        background: black;
         width: 70%;
-        overflow: scroll;
-        height: 100vh;
+        overflow-y: scroll;
+        height: 91vh;
     }
     .music_field{
         width: 85%;
         margin: 20px auto;
     }
     .music_player{
-        width: 40%;
+        width: 50%;
         position: fixed;
         bottom: 0;
         right: 0;
-        margin:0 20% 30px 0;
+        margin:0 10% 30px 0;
+        z-index: 999;
+    }
+    .music_items{
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom:100px;
+    }
+    .music_item{
+        color: white;
+        border: 1px solid white;
+        border-radius: 20px;
+        padding: 5px 10px;
+        margin:10px;
+        opacity: 0.9;
+    }
+    .music_item:hover{
+        background: white;
+        color: black;
+    }
+    .music_item{
+        cursor: pointer;
+    }
+    .selected_artist_name{
+        color: white;
+        font-weight: bold;
     }
 </style>

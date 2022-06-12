@@ -5,8 +5,8 @@
                 @searchArtist="searchArtist"
             />
             <div class="artist_items">
-                <div class="artist_item" v-for="artist_name in artist_name_list" :key="artist_name.artist_name">
-                    <span @click="selectedArtist(artist_name.artist_name)">{{ artist_name.artist_name }}</span>
+                <div class="artist_item" v-for="artist_name in artist_name_list" :key="artist_name.artist_name" @click="selectedArtist(artist_name.artist_name)">
+                    <span>{{ artist_name.artist_name }}</span>
                 </div>
             </div>
         </div>
@@ -66,10 +66,11 @@ export default Vue.extend({
 <style>
     .artist_area_wrapper{
         padding:10px;
-        background: lightblue;
-        height:100vh;
+        background: black;
+        opacity: 0.9;
+        height:91vh;
         width: 30%;
-        overflow: scroll;
+        overflow-y: scroll;
     }
     .artist_field{
         width: 85%;
@@ -80,10 +81,21 @@ export default Vue.extend({
         margin: 40px auto;
         background: white;
         padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        opacity: 0.9;
     }
     .artist_item{
         border: 1px solid black;
         padding: 5px;
         margin:10px 0;
+        background: black;
+        color: white;
+        cursor: pointer;
+        border-radius: 10px;
+        opacity: 0.9;
+    }
+    .artist_item:hover{
+        opacity: 0.8;
     }
 </style>
