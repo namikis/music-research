@@ -2,7 +2,7 @@
     <div class="music_area_wrapper">
         <div id="music_player_field" class="music_player"></div>
         <div class="music_field">
-            <h1>{{ selected_artist_name }}</h1>
+            <h3>{{ selected_artist_name }}</h3>
             <div class="music_items">
                 <div class="music_item" v-for="music in music_list" :key="music.music_id">
                     <p><span @click="setPlayer(music.music_id)"> {{ music.music_name }}</span><span @click="setTarget(music)"> ▲</span> </p>
@@ -27,7 +27,11 @@ export default Vue.extend({
         selected_artist_name:{
             type: String,
             default: ""
-        }
+        },
+        target_musics: {
+            type: Array,
+            default: ["tes"]
+        },
     },  
     data(){
         return {
@@ -79,12 +83,27 @@ export default Vue.extend({
             let player_tag = '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/'+music_id+'?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; fullscreen; picture-in-picture"></iframe>'
 
             document.getElementById('music_player_field')!.innerHTML = player_tag
+        },
+        getFusionMusic(){
+            const url = "http://localhost:5000/musics/fusion"
+            const params = new URLSearchParams()
+            params.append("valence1", this.target_musics[0]["valence"])
+            params.append("energy1", this.target_musics[0]["energy"])
+            params.append("valence2", this.target_musics[1]["valence"])
+            params.append("energy2", this.target_musics[1]["energy"])
+            axios.post(url, params).then((response) => {
+                this.music_list = response.data
+            })
         }
     },
     watch: {
         selected_artist_name: function(){
-            // get musics of artist_name
-            this.getMusicsByArtistName()
+            console.log(this.selected_artist_name)
+            if(this.selected_artist_name.match("FUSION:")){
+                this.getFusionMusic()
+            }else if(this.selected_artist_name !== ""){
+                this.getMusicsByArtistName()
+            }
         }
     }
 })

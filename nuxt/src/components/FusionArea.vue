@@ -9,7 +9,7 @@
         </div>
        
         <div class="fusion_button_wrapper">
-            <span v-if="target_musics.length==2">Fusion!</span>    
+            <span v-if="target_musics.length==2" @click="getFusion">Fusion!</span>    
         </div>
     </div>    
 </template>
@@ -21,12 +21,20 @@ export default Vue.extend({
         target_musics: {
             type: Array,
             default: ["tes"]
+        },
+        selected_artist_name: {
+            type: String,
+            default: ""
         }
     },
     methods: {
         deleteTarget(music_id: String){
             const processed_musics = this.target_musics.filter(music => music.music_id != music_id)
             this.$emit("update:target_musics", processed_musics)
+        },
+        getFusion(){
+            const fusion_name = "FUSION: " + this.target_musics[0]['music_name'] + " × " + this.target_musics[1]['music_name']
+            this.$emit("update:selected_artist_name", fusion_name)
         }
     },
     mounted(){

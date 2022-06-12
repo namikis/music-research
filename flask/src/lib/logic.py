@@ -1,6 +1,6 @@
 def getFusionedFeature(target_features):
-    valence = (float(target_features[0]["valence"]) + float(target_features[1]["valence"])) / 2
-    energy = (float(target_features[0]["energy"]) + float(target_features[1]["energy"])) / 2
+    valence = (float(target_features["valence1"]) + float(target_features["valence2"])) / 2
+    energy = (float(target_features["energy1"]) + float(target_features["energy2"])) / 2
     fusioned_feature = {
         "valence": valence,
         "energy": energy

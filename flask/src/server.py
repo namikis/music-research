@@ -30,7 +30,7 @@ def fusionMusic():
     #         "energy": 0.67
     #     }
     # ]
-    target_music_features = request.form.get("target_musics")
+    target_music_features = request.form
     return jsonify(mainController.fusionMusic(target_music_features))
 
 @app.route("/artists/formal_name", methods=['POST'])

@@ -3,11 +3,13 @@
     <Header />
     <FusionArea v-if="target_musics.length >= 1" 
       :target_musics.sync="target_musics"
+      :selected_artist_name.sync="selected_artist_name"
     />
     <div class="container">
       <ArtistArea :selected_artist_name.sync="selected_artist_name" />
       <MusicArea 
         :selected_artist_name.sync="selected_artist_name"
+        :target_musics.sync="target_musics"
         @setTarget="setTarget"  
       />
     </div>
