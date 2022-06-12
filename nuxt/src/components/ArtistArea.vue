@@ -39,12 +39,18 @@ export default Vue.extend({
         selectedArtist(artist_name: String){
             this.$emit("update:selected_artist_name", artist_name)
         },
-        searchArtist(search_name: String){
-            console.log(this.clone_artist_name_list)
+        searchArtist(search_name: string){
             this.artist_name_list = this.clone_artist_name_list.slice()
-            // TODO:SpotifyAPIにsearchして日本語のアーティスト名を取得する
+            
             if(search_name !== ""){
-                this.artist_name_list = this.artist_name_list.filter(artist_name => artist_name.artist_name == search_name)
+                const url = "http://localhost:5000/artists/formal_name"
+                const params = new URLSearchParams()
+                params.append('search_name', search_name)
+                let formal_name = ""
+                axios.post(url, params).then((response) => {
+                    formal_name = response.data
+                    this.artist_name_list = this.artist_name_list.filter(artist_name => artist_name.artist_name === formal_name)
+                }) 
             }
         },
         getAllAtristsName(){
