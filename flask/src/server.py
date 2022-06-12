@@ -13,9 +13,9 @@ def index():
 def getArtists():
     return jsonify(mainController.getArtist())
 
-@app.route("/musics")
+@app.route("/musics", methods=['GET', 'POST'])
 def getMusicsByArtistName():
-    artist_name = request.args.get('artist_name', '')
+    artist_name = request.form['artist_name']
     return jsonify(mainController.getMusicsByArtistName(artist_name))
 
 @app.route("/musics/fusion", methods=['POST'])

@@ -1,11 +1,11 @@
 <template>
     <div class="music_area_wrapper">
+        <div id="music_player_field" class="music_player"></div>
         <div class="music_field">
             <h1>{{ selected_artist_name }}</h1>
             <div class="music_items">
                 <div class="music_item" v-for="music in music_list" :key="music.music_id">
-                    <p>{{ music.music_name }} <span @click="setTarget(music)">▲</span> </p>
-                    <iframe style="border-radius:12px" :src="'https://open.spotify.com/embed/track/' + music.music_id +'?utm_source=generator'" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                    <p><span @click="setPlayer(music.music_id)"> {{ music.music_name }}</span><span @click="setTarget(music)"> ▲</span> </p>
                 </div>
             </div>
         </div>
@@ -64,16 +64,25 @@ export default Vue.extend({
             this.$emit("setTarget", music)
         },
         getMusicsByArtistName(){
-            const url = "http://localhost:5000/musics?artist_name='" + this.selected_artist_name + "'"
+            const url = "http://localhost:5000/musics"
+            const params = new URLSearchParams()
+            params.append('artist_name', "'" + this.selected_artist_name + "'")
             console.log(url)
-            axios.get(url).then((response) => {
+            axios.post(url, params).then((response) => {
                 this.music_list = response.data
             })
+        },
+        setPlayer(music_id: String){
+            //this.$store.commit('player/setMusicIdToPlayer', music_id)
+            //console.log(this.$store.state.player.musicIdInPlayer)
+            // 確認： encrypted-media; を消さないと再生されない
+            let player_tag = '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/'+music_id+'?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; fullscreen; picture-in-picture"></iframe>'
+
+            document.getElementById('music_player_field')!.innerHTML = player_tag
         }
     },
     watch: {
         selected_artist_name: function(){
-            console.log("testes")
             // get musics of artist_name
             this.getMusicsByArtistName()
         }
@@ -90,5 +99,12 @@ export default Vue.extend({
     .music_field{
         width: 85%;
         margin: 20px auto;
+    }
+    .music_player{
+        width: 40%;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        margin:0 20% 30px 0;
     }
 </style>
