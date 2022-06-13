@@ -51,7 +51,11 @@ export default Vue.extend({
                 axios.post(url, params).then((response) => {
                     formal_name = response.data
                     this.artist_name_list = this.artist_name_list.filter(artist_name => artist_name.artist_name === formal_name)
-                }) 
+                }).catch(error => {
+                    console.log("Not Found")
+                    formal_name = search_name
+                    this.artist_name_list = this.artist_name_list.filter(artist_name => artist_name.artist_name === formal_name)
+                })
             }
         },
         searchSong(search_name: string){

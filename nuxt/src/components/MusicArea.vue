@@ -3,13 +3,18 @@
         <div id="music_player_field" class="music_player"></div>
         <div class="music_field">
             <h3 class="selected_artist_name">{{ selected_artist_name }}</h3>
-            <div class="music_items">
-                <div v-if="music_list.length == 0" class="intro_wrapper">
-                    <h1 class="intro_message">Search,  Listen, and Fusion Musics.</h1>
+            <div>
+                <div v-if="music_list.length > 0" class="music_items">
+                    <div class="music_item" v-for="music in music_list" :key="music.music_id" @click="setPlayer(music.music_id)">
+                        <span @click="setTarget(music)"> ▲</span>
+                        <span> {{ music.music_name }}</span>
+                    </div>
                 </div>
-                <div v-else class="music_item" v-for="music in music_list" :key="music.music_id" @click="setPlayer(music.music_id)">
-                    <span @click="setTarget(music)"> ▲</span>
-                    <span> {{ music.music_name }}</span>
+                <div v-else-if="search_error">
+                    <h1 class="intro_message">Not Found.</h1>
+                </div>
+                <div v-else class="intro_wrapper">
+                    <h1 class="intro_message">Search,  Listen, and Fusion Musics.</h1>
                 </div>
             </div>
         </div>
@@ -39,7 +44,8 @@ export default Vue.extend({
     },  
     data(){
         return {
-            music_list: [] as Array<Music>
+            music_list: [] as Array<Music>,
+            search_error: false as boolean,
         }
     },
     methods: {
@@ -78,9 +84,17 @@ export default Vue.extend({
             const url = "http://localhost:5000/musics/formal_name"
             const params = new URLSearchParams()
             params.append("search_name", search_name)
-            axios.post(url, params).then((response) => {
-                this.music_list = response.data
-            })
+          
+                axios.post(url, params).then((response) => {
+                    this.music_list = response.data
+                    console.log(response.data)
+                    if(this.music_list.length == 0){
+                        this.search_error = true;
+                    }
+                }).catch(error => {
+                    console.log("Not Found")
+                    this.search_error = true;
+                })
         }
     },
     watch: {
@@ -93,6 +107,7 @@ export default Vue.extend({
             }else if(this.selected_artist_name !== ""){
                 this.getMusicsByArtistName()
             }
+            this.search_error = false;
         }
     }
 })
