@@ -16,4 +16,7 @@
         background: black;
         color: #00DC82;
     }
+    .header_wrapper{
+        border-bottom: 1px solid rgba(0, 0, 0, 0.7);
+    }
 </style>

@@ -4,7 +4,10 @@
         <div class="music_field">
             <h3 class="selected_artist_name">{{ selected_artist_name }}</h3>
             <div class="music_items">
-                <div class="music_item" v-for="music in music_list" :key="music.music_id" @click="setPlayer(music.music_id)">
+                <div v-if="music_list.length == 0" class="intro_wrapper">
+                    <h1 class="intro_message">Search,  Listen, and Fusion Musics.</h1>
+                </div>
+                <div v-else class="music_item" v-for="music in music_list" :key="music.music_id" @click="setPlayer(music.music_id)">
                     <span @click="setTarget(music)"> ▲</span>
                     <span> {{ music.music_name }}</span>
                 </div>
@@ -38,31 +41,6 @@ export default Vue.extend({
         return {
             music_list: [] as Array<Music>
         }
-    },
-    mounted(){
-        this.music_list = [
-            {
-                "music_name": 'ミラーチューン',
-                "valence": 0.895,
-                "energy": 0.933,
-                "music_id": "0R8JLNP107Hr7V7lL9oh13",
-                "artist_name": "artist1"
-            },
-            {
-                "music_name": 'あいつら全員同窓会',
-                "valence": 0.913,
-                "energy": 0.913,
-                "music_id": "2VIK6jaaKghS4QPHr6sAkv",
-                "artist_name": "artist2"
-            },
-            {
-                "music_name": "秒針を噛む",
-                "valence": 0.775,
-                "energy": 0.962,
-                "music_id": "4HgsPAX3MmMgIT60hJ4W4U",
-                "artist_name": "artist3"
-            }
-        ]
     },
     methods: {
         setTarget(music: Music){
@@ -125,6 +103,7 @@ export default Vue.extend({
         width: 70%;
         overflow-y: scroll;
         height: 91vh;
+        position:relative;
     }
     .music_field{
         width: 85%;
@@ -162,4 +141,13 @@ export default Vue.extend({
         color: white;
         font-weight: bold;
     }
+    .intro_message{
+        color: #00DC82;
+    }
+    .intro_wrapper{
+        position:absolute;
+        top:40%;
+        left:15%;
+    }
+  
 </style>
