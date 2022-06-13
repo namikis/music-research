@@ -76,9 +76,9 @@ export default Vue.extend({
         padding:10px;
         background: black;
         opacity: 0.9;
-        height:91vh;
         width: 30%;
-        overflow-y: scroll;
+        border-right: 0.8px solid gray;
+        height: 92vh;
     }
     .artist_field{
         width: 85%;
@@ -86,17 +86,19 @@ export default Vue.extend({
     }
     .artist_items{
         width: 90%;
-        margin: 40px auto;
+        margin: 20px auto;
         background: white;
         padding: 20px;
         border-radius: 10px;
         text-align: center;
         opacity: 0.9;
+        height: 76vh;
+        overflow-y: scroll;
     }
     .artist_item{
         border: 1px solid black;
         padding: 5px;
-        margin:10px 0;
+        margin:5px 0;
         background: black;
         color: white;
         cursor: pointer;
