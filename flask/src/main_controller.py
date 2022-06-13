@@ -18,7 +18,8 @@ class mainController():
     def fusionMusic(target_music_features):
         fusioned_feature = logic.getFusionedFeature(target_music_features)
         db_conn = DB_CONN()
-        return db_conn.getMusicsByFeature(fusioned_feature)
+        musics = db_conn.getMusicsByFeature(fusioned_feature)
+        return logic.preprocessData(musics)
 
     @staticmethod
     def getFormalName(search_name):
@@ -30,5 +31,6 @@ class mainController():
         spotify_music = SpotifyMusic()
         target_music_list = spotify_music.searchFormalMusics(search_name)
         db_conn = DB_CONN()
-        return db_conn.getMusicsByFormalName(target_music_list)
+        musics = db_conn.getMusicsByFormalName(target_music_list)
+        return logic.preprocessData(musics)
 

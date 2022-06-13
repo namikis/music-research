@@ -6,3 +6,8 @@ def getFusionedFeature(target_features):
         "energy": energy
     }
     return fusioned_feature
+
+def preprocessData(musics):
+    for music in musics:
+        music["music_name"] = music["music_name"] + " - " + music["artist_name"]
+    return musics
