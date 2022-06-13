@@ -9,8 +9,8 @@
         </div>
        
         <div>
-            <div class="fusion_button_wrapper" v-if="target_musics.length==2">
-                <span @click="getFusion">Fusion!</span>    
+            <div class="fusion_button_wrapper" v-if="target_musics.length==2" @click="getFusion">
+                <span>Fusion!</span>    
             </div>
         </div>
     </div>    
