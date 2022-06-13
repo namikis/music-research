@@ -25,3 +25,10 @@ class mainController():
         spotify_music = SpotifyMusic()
         return spotify_music.searchFormalName(search_name)
 
+    @staticmethod
+    def getFormalMusics(search_name):
+        spotify_music = SpotifyMusic()
+        target_music_list = spotify_music.searchFormalMusics(search_name)
+        db_conn = DB_CONN()
+        return db_conn.getMusicsByFormalName(target_music_list)
+

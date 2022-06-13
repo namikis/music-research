@@ -38,5 +38,10 @@ def getFormalName():
     search_name = request.form["search_name"]
     return jsonify(mainController.getFormalName(search_name))
 
+@app.route("/musics/formal_name", methods=['POST'])
+def getFormalMusic():
+    search_name = request.form["search_name"]
+    return jsonify(mainController.getFormalMusics(search_name))
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80, debug=True)

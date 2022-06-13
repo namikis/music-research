@@ -95,6 +95,14 @@ export default Vue.extend({
             axios.post(url, params).then((response) => {
                 this.music_list = response.data
             })
+        },
+        getSearchMusic(search_name: string){
+            const url = "http://localhost:5000/musics/formal_name"
+            const params = new URLSearchParams()
+            params.append("search_name", search_name)
+            axios.post(url, params).then((response) => {
+                this.music_list = response.data
+            })
         }
     },
     watch: {
@@ -102,6 +110,8 @@ export default Vue.extend({
             console.log(this.selected_artist_name)
             if(this.selected_artist_name.match("FUSION:")){
                 this.getFusionMusic()
+            }else if(this.selected_artist_name.match("SONGS:")){
+                this.getSearchMusic(this.selected_artist_name.substring(7))
             }else if(this.selected_artist_name !== ""){
                 this.getMusicsByArtistName()
             }

@@ -3,6 +3,7 @@
         <div class="artist_field">
             <SearchArea 
                 @searchArtist="searchArtist"
+                @searchSong="searchSong"
             />
             <div class="artist_items">
                 <div class="artist_item" v-for="artist_name in artist_name_list" :key="artist_name.artist_name" @click="selectedArtist(artist_name.artist_name)">
@@ -53,6 +54,9 @@ export default Vue.extend({
                 }) 
             }
         },
+        searchSong(search_name: string){
+            this.$emit("update:selected_artist_name", "SONGS: " + search_name)
+        },      
         getAllAtristsName(){
             const url = "http://localhost:5000/artists"
             axios.get(url).then((response) => {

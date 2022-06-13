@@ -63,5 +63,22 @@ class DB_CONN:
         self.closeDB()
         return musics
 
+    def getMusicsByFormalName(self, music_name_list):
+        in_text = self.getInText(music_name_list)
+        sql = "SELECT music_name, valence, energy, artist_name, music_id FROM musics WHERE music_name IN" + in_text
+        musics = self.selectSQL(sql)
+        self.closeDB()
+        return musics
+
+    def getInText(self, music_list):
+        in_text = "("
+        for music_name in music_list:
+            music_name = music_name.replace("'", " ")
+            music_name = music_name.replace('"', " ")
+            in_text += '"' + music_name + '",'
+        in_text = in_text[:-1] + ")"
+        print(in_text)
+        return in_text
+
     def closeDB(self):
         self.conn.close()

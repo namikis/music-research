@@ -72,3 +72,10 @@ class SpotifyMusic():
     def searchFormalName(self, search_name):
         result = self.spotify.search(q=search_name, type='artist', market=None)
         return result["artists"]["items"][0]["name"]
+
+    def searchFormalMusics(self, search_name):
+        results = self.spotify.search(q=search_name, type='track', market=None)
+        music_list = []
+        for result in results["tracks"]["items"]:
+            music_list.append(result["name"])
+        return music_list
