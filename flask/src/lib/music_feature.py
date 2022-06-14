@@ -1,6 +1,8 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import os
+import time
+import pprint
 
 class SpotifyMusic():
     def __init__(self):
@@ -51,6 +53,7 @@ class SpotifyMusic():
             for i in range(20):
                 offset = 50 * i
                 results = self.spotify.search(q=search_str, limit=50, offset=offset, type='track', market=None)
+                time.sleep(1)
                 for result in results['tracks']['items']:
                     processed_music = self.preProcess(result)
                     print(processed_music['music_name'], "-", processed_music['artist_name'])
@@ -60,14 +63,17 @@ class SpotifyMusic():
 
 
         track_ids = list(set(all_track_ids))
+        print(len(track_ids))
 
         for idx in range(0, len(track_ids), 100):
-            audio_feature_list = self.spotify.audio_features(track_ids[idx:idx+99])
+            print("\nidx: " + str(idx) + " len: " + str(len(track_ids[idx:idx+100])))
+            audio_feature_list = self.spotify.audio_features(track_ids[idx:idx+100])
+            pprint.pprint(audio_feature_list)
             for audio_feature in audio_feature_list:
                 audio_data_list[audio_feature['id']]["valence"] = audio_feature['valence']
                 audio_data_list[audio_feature['id']]["energy"] = audio_feature['energy']
                 audio_data_list[audio_feature['id']]["music_id"] = audio_feature['id']
-
+            time.sleep(1)
         return audio_data_list
 
     def getMusicsSmall(self):
@@ -99,8 +105,12 @@ class SpotifyMusic():
         return audio_data_list
 
     def searchFormalName(self, search_name):
-        result = self.spotify.search(q=search_name, type='artist', market=None)
-        return result["artists"]["items"][0]["name"]
+        results = self.spotify.search(q=search_name, type='artist', market=None)
+        artist_name_list = []
+        for result in results["artists"]["items"]:
+            artist_name_list.append(result["name"])
+        return artist_name_list
+
 
     def searchFormalMusics(self, search_name):
         results = self.spotify.search(q=search_name, type='track', market=None)

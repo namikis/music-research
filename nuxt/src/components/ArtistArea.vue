@@ -47,14 +47,15 @@ export default Vue.extend({
                 const url = "http://localhost:5000/artists/formal_name"
                 const params = new URLSearchParams()
                 params.append('search_name', search_name)
-                let formal_name = ""
+                let formal_name_list: String[] = []
                 axios.post(url, params).then((response) => {
-                    formal_name = response.data
-                    this.artist_name_list = this.artist_name_list.filter(artist_name => artist_name.artist_name === formal_name)
+                    formal_name_list = response.data
+                    console.log(formal_name_list)
+                    this.artist_name_list = this.artist_name_list.filter(artist_name => formal_name_list.includes(artist_name.artist_name))
                 }).catch(error => {
                     console.log("Not Found")
-                    formal_name = search_name
-                    this.artist_name_list = this.artist_name_list.filter(artist_name => artist_name.artist_name === formal_name)
+                    formal_name_list = [search_name]
+                    this.artist_name_list = this.artist_name_list.filter(artist_name => formal_name_list.includes(artist_name.artist_name))
                 })
             }
         },
