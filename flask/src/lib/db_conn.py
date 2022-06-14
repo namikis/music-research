@@ -22,7 +22,7 @@ class DB_CONN:
             #sql = "INSERT INTO musics (music_name, valence, energy, music_id) VALUE('test_name2', 1, 2, '123445')"
             sql = "INSERT INTO musics (music_name, valence, energy, music_id, artist_name) VALUE "
             count = 0
-            #15個ずつISNERT
+            #50個ずつISNERT
             for data in data_list.values():
                 count += 1
                 if "valence" in data and "energy" in data:
