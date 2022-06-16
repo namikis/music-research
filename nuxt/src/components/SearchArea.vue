@@ -43,5 +43,8 @@ export default Vue.extend({
     .search_type_wrapper{
         color: white;
     }
+    .search_wrapper{
+        margin-left: 15px;
+    }
     
 </style>
