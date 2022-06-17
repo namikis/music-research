@@ -32,16 +32,7 @@ export type Music = {
     artist_name: string
 }
 export default Vue.extend({
-    props: {
-        selected_artist_name:{
-            type: String,
-            default: ""
-        },
-        target_musics: {
-            type: Array,
-            default: ["tes"]
-        },
-    },  
+    props:["target_musics", "selected_artist_name"],
     data(){
         return {
             music_list: [] as Array<Music>,

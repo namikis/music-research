@@ -19,19 +19,10 @@
 import Vue from 'vue'
 import { Music } from './MusicArea.vue'
 export default Vue.extend({
-    props: {
-        target_musics: {
-            type: Array,
-            default: ["tes"]
-        },
-        selected_artist_name: {
-            type: String,
-            default: ""
-        }
-    },
+    props:["target_musics", "selected_artist_name"],
     methods: {
         deleteTarget(music_id: String){
-            const processed_musics = this.target_musics.filter(music => music.music_id != music_id)
+            const processed_musics = this.target_musics.filter((music : Music) => music.music_id != music_id)
             this.$emit("update:target_musics", processed_musics)
         },
         getFusion(){
