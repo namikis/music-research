@@ -1,10 +1,16 @@
 import pymysql.cursors
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class DB_CONN:
-    def __init__(self):
+    def __init__(self, local=False):
         port = os.environ['DB_PORT']
-        host = os.environ['DB_HOST']
+        if local == False:
+            host = os.environ['DB_HOST']
+        else:
+            host = "localhost"
         user = os.environ['DB_USERNAME']
         password = os.environ['DB_PASSWORD']
         db_name = os.environ['DB_NAME']
@@ -79,6 +85,12 @@ class DB_CONN:
         in_text = in_text[:-1] + ")"
         print(in_text)
         return in_text
+
+    def getMusicDist(self):
+        sql = "SELECT artist_name AS artist, COUNT(*) AS music_count from musics GROUP BY artist_name ORDER BY music_count;"
+        res = self.selectSQL(sql)
+        self.closeDB()
+        return res
 
     def closeDB(self):
         self.conn.close()

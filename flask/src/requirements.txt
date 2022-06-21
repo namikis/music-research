@@ -3,3 +3,4 @@ PyMySQL
 Flask
 flask_cors
 cryptography
+python-dotenv
