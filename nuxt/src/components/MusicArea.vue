@@ -72,6 +72,9 @@ export default Vue.extend({
             params.append("energy2", this.target_musics[1]["energy"])
             axios.post(url, params).then((response) => {
                 this.music_list = response.data
+                if(response.data == 0){
+                    this.search_error = true;
+                }
             })
         },
         getSearchMusic(search_name: string){
@@ -94,6 +97,7 @@ export default Vue.extend({
     watch: {
         selected_artist_name: function(){
             console.log(this.selected_artist_name)
+            this.search_error = false;
             if(this.selected_artist_name.match("FUSION:")){
                 this.getFusionMusic()
             }else if(this.selected_artist_name.match("SONGS:")){
@@ -101,7 +105,7 @@ export default Vue.extend({
             }else if(this.selected_artist_name !== ""){
                 this.getMusicsByArtistName()
             }
-            this.search_error = false;
+            
         },
         target_music_id: function(){
             this.setPlayer()
