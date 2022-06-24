@@ -92,5 +92,11 @@ class DB_CONN:
         self.closeDB()
         return res
 
+    def getAllMusicFeatures(self):
+        sql = "SELECT valence, energy from musics;"
+        res = self.selectSQL(sql)
+        self.closeDB()
+        return res
+
     def closeDB(self):
         self.conn.close()
