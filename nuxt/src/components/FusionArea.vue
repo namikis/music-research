@@ -2,10 +2,12 @@
     <div class="fusion_wrapper">
 
         <div class="target_item" v-for="target_music in target_musics" :key="target_music.music_id">
-            <span @click="deleteTarget(target_music.music_id)">▼</span>
-            {{ target_music.music_name  }}
-            -
-            {{ target_music.artist_name }}
+            <span @click="deleteTarget(target_music.music_id)" class="deleteButton">▼</span>
+            <span @click="setTargetMusicId(target_music.music_id)">
+                {{ target_music.music_name  }}
+                -
+                {{ target_music.artist_name }}
+            </span>
         </div>
        
         <div>
@@ -19,7 +21,7 @@
 import Vue from 'vue'
 import { Music } from './MusicArea.vue'
 export default Vue.extend({
-    props:["target_musics", "selected_artist_name"],
+    props:["target_musics", "selected_artist_name", "target_music_id"],
     methods: {
         deleteTarget(music_id: String){
             const processed_musics = this.target_musics.filter((music : Music) => music.music_id != music_id)
@@ -28,6 +30,9 @@ export default Vue.extend({
         getFusion(){
             const fusion_name = "FUSION: " + this.target_musics[0]['music_name'] + " × " + this.target_musics[1]['music_name']
             this.$emit("update:selected_artist_name", fusion_name)
+        },
+        setTargetMusicId(target_music_id: string){
+            this.$emit("update:target_music_id", target_music_id)
         }
     },
     mounted(){
@@ -62,5 +67,15 @@ export default Vue.extend({
     }
     .fusion_button_wrapper{
         color:#00DC82;
+    }
+    .deleteButton{
+        background: white;
+        color: black;
+        border-radius: 50%;
+        padding: 2px;
+    }
+    .deleteButton:hover{
+        color: #00DC82;
+        opacity: 0.8;
     }
 </style>

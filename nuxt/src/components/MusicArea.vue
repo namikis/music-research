@@ -5,7 +5,7 @@
             <h3 class="selected_artist_name">{{ selected_artist_name }}</h3>
             <div>
                 <div v-if="music_list.length > 0" class="music_items">
-                    <div class="music_item" v-for="music in music_list" :key="music.music_id" @click="setPlayer(music.music_id)">
+                    <div class="music_item" v-for="music in music_list" :key="music.music_id" @click="setTargetMusicId(music.music_id)">
                         <span @click="setTarget(music)"> ▲</span>
                         <span> {{ music.music_name }}</span>
                     </div>
@@ -32,7 +32,7 @@ export type Music = {
     artist_name: string
 }
 export default Vue.extend({
-    props:["target_musics", "selected_artist_name"],
+    props:["target_musics", "selected_artist_name", "target_music_id"],
     data(){
         return {
             music_list: [] as Array<Music>,
@@ -52,11 +52,14 @@ export default Vue.extend({
                 this.music_list = response.data
             })
         },
-        setPlayer(music_id: String){
+        setTargetMusicId(music_id: String){
+            this.$emit("update:target_music_id", music_id)
+        },
+        setPlayer(){
             //this.$store.commit('player/setMusicIdToPlayer', music_id)
             //console.log(this.$store.state.player.musicIdInPlayer)
             // 確認： encrypted-media; を消さないと再生されない
-            let player_tag = '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/'+music_id+'?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; fullscreen; picture-in-picture"></iframe>'
+            let player_tag = '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/'+this.target_music_id+'?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; fullscreen; picture-in-picture"></iframe>'
 
             document.getElementById('music_player_field')!.innerHTML = player_tag
         },
@@ -99,6 +102,9 @@ export default Vue.extend({
                 this.getMusicsByArtistName()
             }
             this.search_error = false;
+        },
+        target_music_id: function(){
+            this.setPlayer()
         }
     }
 })

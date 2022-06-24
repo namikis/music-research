@@ -4,12 +4,14 @@
     <FusionArea v-if="target_musics.length >= 1" 
       :target_musics.sync="target_musics"
       :selected_artist_name.sync="selected_artist_name"
+      :target_music_id.sync="target_music_id"
     />
     <div class="container">
       <ArtistArea :selected_artist_name.sync="selected_artist_name" />
       <MusicArea 
         :selected_artist_name.sync="selected_artist_name"
         :target_musics.sync="target_musics"
+        :target_music_id.sync="target_music_id"
         @setTarget="setTarget"  
       />
     </div>
@@ -25,7 +27,8 @@ export default Vue.extend({
   data(){
     return {
       target_musics: [] as Array<Music>,
-      selected_artist_name: ""
+      selected_artist_name: "",
+      target_music_id: "",
     }
   },
   methods: {
