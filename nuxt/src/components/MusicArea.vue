@@ -5,9 +5,9 @@
             <h3 class="selected_artist_name">{{ selected_artist_name }}</h3>
             <div>
                 <div v-if="music_list.length > 0" class="music_items">
-                    <div class="music_item" v-for="music in music_list" :key="music.music_id" @click="setTargetMusicId(music.music_id)">
-                        <span @click="setTarget(music)"> ▲</span>
-                        <span> {{ music.music_name }}</span>
+                    <div class="music_item" v-for="music in music_list" :key="music.music_id">
+                        <span @click="setTarget(music)" class="toFusionButton"> ▲</span>
+                        <span @click="setTargetMusicId(music.music_id)" class="music"> {{ music.music_name }}</span>
                     </div>
                 </div>
                 <div v-else-if="search_error">
@@ -142,12 +142,15 @@ export default Vue.extend({
         margin:10px;
         opacity: 0.9;
     }
-    .music_item:hover{
+    /* .music_item:hover{
         background: white;
         color: black;
-    }
+    } */
     .music_item{
         cursor: pointer;
+    }
+    .music:hover{
+        color: #00DC82;
     }
     .selected_artist_name{
         color: white;
@@ -161,5 +164,14 @@ export default Vue.extend({
         top:40%;
         left:15%;
     }
-  
+    .toFusionButton{
+        background: white;
+        color: black;
+        border-radius: 50%;
+        padding: 2px;
+    }
+    .toFusionButton:hover{
+        color: #00DC82;
+        opacity: 0.8;
+    }
 </style>

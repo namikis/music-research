@@ -3,7 +3,7 @@
 
         <div class="target_item" v-for="target_music in target_musics" :key="target_music.music_id">
             <span @click="deleteTarget(target_music.music_id)" class="deleteButton">▼</span>
-            <span @click="setTargetMusicId(target_music.music_id)">
+            <span @click="setTargetMusicId(target_music.music_id)" class="target_music">
                 {{ target_music.music_name  }}
                 -
                 {{ target_music.artist_name }}
@@ -77,5 +77,8 @@ export default Vue.extend({
     .deleteButton:hover{
         color: #00DC82;
         opacity: 0.8;
+    }
+    .target_music:hover{
+        color: #00DC82;
     }
 </style>
