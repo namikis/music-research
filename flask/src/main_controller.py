@@ -19,7 +19,8 @@ class mainController():
         fusioned_feature = logic.getFusionedFeature(target_music_features)
         db_conn = DB_CONN()
         musics = db_conn.getMusicsByFeature(fusioned_feature)
-        return logic.preprocessData(musics)
+        filtered_musics = logic.getFilteredMusics(musics, fusioned_feature)
+        return filtered_musics
 
     @staticmethod
     def getFormalName(search_name):
