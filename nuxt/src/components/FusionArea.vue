@@ -5,8 +5,10 @@
             <span @click="deleteTarget(target_music.music_id)" class="deleteButton">▼</span>
             <span @click="setTargetMusicId(target_music.music_id)" class="target_music">
                 {{ target_music.music_name  }}
-                -
-                {{ target_music.artist_name }}
+                <span v-if="hasArtistName(target_music.music_name, target_music.artist_name)">
+                    -
+                    {{ target_music.artist_name }}
+                </span>
             </span>
         </div>
        
@@ -33,6 +35,9 @@ export default Vue.extend({
         },
         setTargetMusicId(target_music_id: string){
             this.$emit("update:target_music_id", target_music_id)
+        },
+        hasArtistName(music_name: string, artist_name: string){
+            return !music_name.match(artist_name)
         }
     },
     mounted(){
