@@ -1,8 +1,6 @@
-
-# コンテナ外から実行
 import sys
 sys.path.append("../")
-from flask.src.lib.db_conn import DB_CONN
+from lib.db_conn import DB_CONN
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import pprint
@@ -10,7 +8,7 @@ import numpy as np
 
 import matplotlib.cm as cm
 
-db_conn = DB_CONN(local=True)
+db_conn = DB_CONN()
 music_info_list = db_conn.getAllMusicFeatures()
  
 
@@ -32,3 +30,4 @@ ax.set_xlabel("valence")
 ax.set_ylabel("energy")
 fig.colorbar(g[3], ax = ax)
 plt.show()
+fig.savefig("./images/2dhist.png")

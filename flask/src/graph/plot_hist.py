@@ -1,14 +1,12 @@
-
-# コンテナ外から実行
 import sys
 sys.path.append("../")
-from flask.src.lib.db_conn import DB_CONN
+from lib.db_conn import DB_CONN
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import pprint
 import numpy as np
 
-db_conn = DB_CONN(local=True)
+db_conn = DB_CONN()
 artist_info = db_conn.getMusicDist()
  
 # artist_info = [
@@ -60,3 +58,4 @@ ax.set_xticklabels(x_ticklabel, rotation=90)
 
 ax.hist(music_count_list, bins=32, alpha=0.5, ec='navy', range=(0, 1600))
 plt.show()
+fig.savefig("./images/hist.png")
