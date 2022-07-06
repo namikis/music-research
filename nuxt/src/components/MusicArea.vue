@@ -68,8 +68,10 @@ export default Vue.extend({
             const params = new URLSearchParams()
             params.append("valence1", this.target_musics[0]["valence"])
             params.append("energy1", this.target_musics[0]["energy"])
+            params.append("music_name1", this.target_musics[0]["music_name"])
             params.append("valence2", this.target_musics[1]["valence"])
             params.append("energy2", this.target_musics[1]["energy"])
+            params.append("music_name2", this.target_musics[1]["music_name"])
             axios.post(url, params).then((response) => {
                 this.music_list = response.data
                 if(response.data == 0){

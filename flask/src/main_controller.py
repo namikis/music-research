@@ -1,5 +1,6 @@
 from lib.db_conn import DB_CONN
 from lib.music_feature import SpotifyMusic
+from lib.logs import LogWriter
 import lib.logic as logic
 
 class mainController():
@@ -20,6 +21,10 @@ class mainController():
         db_conn = DB_CONN()
         musics = db_conn.getMusicsByFeature(fusioned_feature)
         filtered_musics = logic.getFilteredMusics(musics, fusioned_feature)
+
+        log_writer = LogWriter()
+        log_writer.writeFusionLog([target_music_features["music_name1"], target_music_features["music_name2"]])
+
         return filtered_musics
 
     @staticmethod
