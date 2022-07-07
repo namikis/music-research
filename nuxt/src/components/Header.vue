@@ -10,7 +10,7 @@
             </div>
             <div v-else>
                 User : {{ user_name }}
-                <span @click="deleteUserName">delete</span>                
+                <span @click="deleteUserName">edit</span>                
             </div>
         </div>
     </div>
