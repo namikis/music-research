@@ -24,6 +24,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
+import $cookies from "cookie-universal-nuxt"
+
 export type Music = {
     music_name: string,
     valence: Number,
@@ -72,6 +74,7 @@ export default Vue.extend({
             params.append("valence2", this.target_musics[1]["valence"])
             params.append("energy2", this.target_musics[1]["energy"])
             params.append("music_name2", this.target_musics[1]["music_name"])
+            params.append("user_name", this.$cookies.get("user_name"))
             axios.post(url, params).then((response) => {
                 this.music_list = response.data
                 if(response.data == 0){
