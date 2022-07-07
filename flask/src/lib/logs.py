@@ -2,7 +2,7 @@ import logging
 
 # artist検索　アーティスト名
 # 楽曲検索　楽曲名
-# フュージョン　曲名✖️２ done
+# フュージョン　曲名✖️２
 # プレイヤーを開く　曲名
 
 class LogWriter():
@@ -27,4 +27,8 @@ class LogWriter():
 
     def writeSearchLog(self, search_word, search_type):
         text = "SEARCH " + search_type + ": " + search_word
+        self.writeLog(text)
+
+    def writePlayerLog(self, music_name):
+        text = "OPEN Player: " + music_name
         self.writeLog(text)

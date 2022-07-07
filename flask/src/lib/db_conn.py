@@ -98,5 +98,11 @@ class DB_CONN:
         self.closeDB()
         return res
 
+    def getMusicNameByMusicId(self, music_id):
+        sql = "SELECT music_name from musics WHERE music_id='" + music_id + "'"
+        res = self.selectSQL(sql)
+        self.closeDB()
+        return res
+
     def closeDB(self):
         self.conn.close()

@@ -61,6 +61,7 @@ export default Vue.extend({
             //this.$store.commit('player/setMusicIdToPlayer', music_id)
             //console.log(this.$store.state.player.musicIdInPlayer)
             // 確認： encrypted-media; を消さないと再生されない
+            this.writePlayerLog()
             let player_tag = '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/'+this.target_music_id+'?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; fullscreen; picture-in-picture"></iframe>'
 
             document.getElementById('music_player_field')!.innerHTML = player_tag
@@ -97,6 +98,15 @@ export default Vue.extend({
                     console.log("Not Found")
                     this.search_error = true;
                 })
+        },
+        writePlayerLog(){
+            const url = "http://localhost:5000/logs/player"
+            const params = new URLSearchParams()
+            params.append("music_id", this.target_music_id)
+            params.append("user_name", this.$cookies.get("user_name"))
+            axios.post(url, params).then((response) => {
+                console.log(response.data)
+            })
         }
     },
     watch: {

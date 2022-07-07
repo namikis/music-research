@@ -45,3 +45,13 @@ class mainController():
         log_writer = LogWriter(log_data["user_name"] + " - Action")
         log_writer.writeSearchLog(log_data["search_word"], log_data["search_type"])
         return "log written."
+
+    @staticmethod
+    def writePlayerLog(set_player_data):
+        db_conn = DB_CONN()
+        music_name = db_conn.getMusicNameByMusicId(set_player_data['music_id'])[0]['music_name']
+
+        log_writer = LogWriter(set_player_data['user_name'] + " - Action")
+        log_writer.writePlayerLog(music_name)
+
+        return "log written."

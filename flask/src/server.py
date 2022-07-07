@@ -48,5 +48,10 @@ def writeSearchLog():
     search_data = request.form
     return mainController.writeSearchLog(search_data)
 
+@app.route("/logs/player", methods=['POST'])
+def writePlayerLog():
+    set_player_data = request.form
+    return mainController.writePlayerLog(set_player_data)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80, debug=True)
