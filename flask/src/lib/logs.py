@@ -6,11 +6,17 @@ import logging
 # プレイヤーを開く　曲名
 
 class LogWriter():
-    def __init__(self):
-        logging.basicConfig(filename='./logs/actions.log', format='%(asctime)s %(message)s', datefmt='%m/%d %I:%M:%S %p', level=logging.WARNING)
+    def __init__(self, log_type):
+        self.logger = logging.getLogger(log_type)
+        self.logger.setLevel(logging.DEBUG)
+        ch = logging.FileHandler("./logs/" + log_type + ".log")
+        ch.setLevel(logging.DEBUG)
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        ch.setFormatter(formatter)
+        self.logger.addHandler(ch)
 
     def writeLog(self, text):
-        logging.warning(text)
+        self.logger.debug(text)
 
     def writeFusionLog(self, artist_name_list):
         text = "FUSION: " + artist_name_list[0] + " ✖️ " + artist_name_list[1]
