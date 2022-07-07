@@ -12,10 +12,13 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
+import axios from 'axios'
+import $cookies from "cookie-universal-nuxt"
+
 export default Vue.extend({
     data(){
         return {
-            search_name: "" as String,
+            search_name: "" as string,
             search_type: "artist" as string
         }
     },  
@@ -26,7 +29,14 @@ export default Vue.extend({
             }else if(this.search_type == "song"){
                 this.$emit("searchSong", this.search_name)
             }
-            
+            const url = "http://localhost:5000/logs/search"
+            let params = new URLSearchParams()
+            params.append("search_word", this.search_name)
+            params.append("search_type", this.search_type)
+            params.append("user_name", this.$cookies.get("user_name"))
+            axios.post(url, params).then((response) => {
+                console.log(response.data)
+            })
         },
         clearSearch(){
             this.search_name = ""

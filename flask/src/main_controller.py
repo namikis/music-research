@@ -40,3 +40,8 @@ class mainController():
         musics = db_conn.getMusicsByFormalName(target_music_list)
         return logic.preprocessData(musics)
 
+    @staticmethod
+    def writeSearchLog(log_data):
+        log_writer = LogWriter(log_data["user_name"] + " - Action")
+        log_writer.writeSearchLog(log_data["search_word"], log_data["search_type"])
+        return "log written."

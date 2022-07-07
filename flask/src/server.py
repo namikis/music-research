@@ -43,5 +43,10 @@ def getFormalMusic():
     search_name = request.form["search_name"]
     return jsonify(mainController.getFormalMusics(search_name))
 
+@app.route("/logs/search", methods=['POST'])
+def writeSearchLog():
+    search_data = request.form
+    return mainController.writeSearchLog(search_data)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80, debug=True)
