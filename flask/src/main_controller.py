@@ -22,7 +22,7 @@ class mainController():
         musics = db_conn.getMusicsByFeature(fusioned_feature)
         filtered_musics = logic.getFilteredMusics(musics, fusioned_feature)
 
-        log_writer = LogWriter()
+        log_writer = LogWriter(target_music_features["user_name"] + " - Action")
         log_writer.writeFusionLog([target_music_features["music_name1"], target_music_features["music_name2"]])
 
         return filtered_musics
