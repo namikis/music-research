@@ -1,11 +1,11 @@
 <template>
     <div class="header_wrapper">
-        <div class="header_logo">
+        <div class="header_logo" @click="toTopPage">
             <h2>FUSION MUSIC</h2>
         </div>
         <div class="header_right_wrapper">
-             <div class="question_wrapper">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScDfsFRKLGLBAMaokk8dte9ai36PEZqzJ-2UxHkP_Wgkno2ug/viewform?usp=sf_link" target="_blank">アンケート</a>
+             <div class="to_research_wrapper">
+                <span @click="toResearch">Research</span>
             </div>
             <div class="name_input_wrapper">
                 <div v-if="user_name == ''">
@@ -49,6 +49,12 @@ export default Vue.extend({
         deleteUserName(){
             this.user_name = ""
             this.$cookies.set("user_name", "")
+        },
+        toResearch(){
+            this.$router.push("/research")
+        },
+        toTopPage(){
+            this.$router.push("/")
         }
     }
 })
@@ -59,6 +65,9 @@ export default Vue.extend({
     body, h1, h2{
         margin:0;
         padding:0;
+    }
+    .header_logo{
+        cursor: pointer;
     }
     .header_logo h2{
         padding:5px 20px;
@@ -94,17 +103,17 @@ export default Vue.extend({
         display: flex;
         align-items: center;
     }
-    .question_wrapper{
+    .to_research_wrapper{
         margin-right: 20px;
     }
-    .question_wrapper:hover{
+    .to_research_wrapper:hover{
         opacity: 0.9;
     }
-    .question_wrapper a{
+    .to_research_wrapper span{
         padding: 5px;
         background: white;
-        text-decoration: none;
         font-weight: bold;
         color: black;
+        cursor: pointer;
     }
 </style>
