@@ -3,16 +3,22 @@
         <div class="header_logo">
             <h2>FUSION MUSIC</h2>
         </div>
-        <div class="name_input_wrapper">
-            <div v-if="user_name == ''">
-                <input type="text" v-model="target_user_name">
-                <span @click="setUserName">set</span>
+        <div class="header_right_wrapper">
+             <div class="question_wrapper">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScDfsFRKLGLBAMaokk8dte9ai36PEZqzJ-2UxHkP_Wgkno2ug/viewform?usp=sf_link" target="_blank">アンケート</a>
             </div>
-            <div v-else>
-                User : {{ user_name }}
-                <span @click="deleteUserName">edit</span>                
+            <div class="name_input_wrapper">
+                <div v-if="user_name == ''">
+                    <input type="text" v-model="target_user_name">
+                    <span @click="setUserName">set</span>
+                </div>
+                <div v-else>
+                    {{ user_name }}
+                    <span @click="deleteUserName">edit</span>                
+                </div>
             </div>
         </div>
+       
     </div>
 </template>
 
@@ -80,5 +86,25 @@ export default Vue.extend({
         font-size: 14px;
         margin-left: 8px;
         cursor: pointer;
+    }
+    .name_input_wrapper span:hover{
+        opacity: 0.9;
+    }
+    .header_right_wrapper{
+        display: flex;
+        align-items: center;
+    }
+    .question_wrapper{
+        margin-right: 20px;
+    }
+    .question_wrapper:hover{
+        opacity: 0.9;
+    }
+    .question_wrapper a{
+        padding: 5px;
+        background: white;
+        text-decoration: none;
+        font-weight: bold;
+        color: black;
     }
 </style>
