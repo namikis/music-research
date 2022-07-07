@@ -6,7 +6,7 @@
         <div class="name_input_wrapper">
             <div v-if="user_name == ''">
                 <input type="text" v-model="target_user_name">
-                <button type="submit" @click.prevent="setUserName">set</button>
+                <span @click="setUserName">set</span>
             </div>
             <div v-else>
                 User : {{ user_name }}
