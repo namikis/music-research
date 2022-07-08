@@ -47,5 +47,6 @@ export default Vue.extend({
   .container{
     display: flex;
     background: black;
+    height: 100vh;
   }
 </style>

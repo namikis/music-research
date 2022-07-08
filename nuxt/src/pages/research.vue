@@ -6,14 +6,25 @@
             <h1 style="color: white;">実験用リンク</h1>
             <div class="research_items">
                 <div class="research_item">
-                    <a href="">動画１</a>
+                  <a href="/research/introduction.pdf" target="_blank">手順書</a>
+                  <a href="https://docs.google.com/forms/d/e/1FAIpQLScDfsFRKLGLBAMaokk8dte9ai36PEZqzJ-2UxHkP_Wgkno2ug/viewform?usp=sf_link" target="_blank">アンケート</a>
+                  <a href="https://open.spotify.com/" target="_blank">Spotify</a>
                 </div>
                 <div class="research_item">
-                    <a href="">動画２</a>
+                  <h1>動画１（Spotify）</h1>
+                  <video controls width="60%">
+                      <source src="/research/Spotify.mp4" type="video/mp4">
+                      Sorry, your browser doesn't support embedded videos.
+                  </video>
                 </div>
                 <div class="research_item">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScDfsFRKLGLBAMaokk8dte9ai36PEZqzJ-2UxHkP_Wgkno2ug/viewform?usp=sf_link" target="_blank">アンケート</a>
+                  <h1>動画２（FUSION MUSIC）</h1>
+                  <video controls width="60%">
+                      <source src="/research/FUSIONMUSIC.mp4" type="video/mp4">
+                      Sorry, your browser doesn't support embedded videos.
+                  </video>
                 </div>
+               
             </div>
             
         </div>
@@ -33,7 +44,7 @@ export default Vue.extend({
   .research_container{
     display: flex;
     background: black;
-    height: 100vh;
+    height: 150vh;
   }
   .research_wrapper{
     width: 60%;
@@ -41,6 +52,7 @@ export default Vue.extend({
   }
   .research_items{
     padding: 20px;
+    margin: 10px;
   }
   .research_item{
       margin: 30px 0;
@@ -52,5 +64,9 @@ export default Vue.extend({
       font-size: 26px;
       text-decoration: none;
       border: 2px solid white;
+  }
+  .research_item h1{
+    color: white;
+    margin: 60px 0;
   }
 </style>
