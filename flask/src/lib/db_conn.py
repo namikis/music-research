@@ -61,7 +61,7 @@ class DB_CONN:
         return musics
 
     def getMusicsByFeature(self, music_feature):
-        param = 0.005
+        param = 0.1
         valence_range = "valence <= " + str(music_feature["valence"] + param) + "&& valence >= " +str(music_feature["valence"] - param)
         energy_range = "energy <= " + str(music_feature["energy"] + param) + "&& energy >= " +str(music_feature["energy"] - param)
         sql = "SELECT music_name, valence, energy, artist_name, music_id FROM musics WHERE " + valence_range + " && " + energy_range
