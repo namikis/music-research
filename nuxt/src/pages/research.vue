@@ -3,9 +3,10 @@
     <Header />
     <div class="research_container">
         <div class="research_wrapper">
-            <h1 style="color: white;">実験用リンク</h1>
+            <h1 style="color: white;">実験用資料</h1>
             <div class="research_items">
                 <div class="research_item">
+                  <h1>リンク</h1>
                   <a href="https://docs.google.com/forms/d/e/1FAIpQLScDfsFRKLGLBAMaokk8dte9ai36PEZqzJ-2UxHkP_Wgkno2ug/viewform?usp=sf_link" target="_blank">アンケート</a>
                   <a href="https://open.spotify.com/" target="_blank">Spotify</a>
                 </div>
@@ -93,7 +94,8 @@ export default Vue.extend({
       border: 2px solid white;
   }
   .research_item h1{
-    color: white;
+    background: white;
+    padding: 5px 15px;
     margin: 30px 0;
   }
   video {
