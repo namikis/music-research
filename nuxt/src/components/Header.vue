@@ -5,6 +5,7 @@
         </div>
         <div class="header_right_wrapper">
              <div class="to_research_wrapper">
+                <span @click="toTopPage">top</span>
                 <span @click="toResearch">Research</span>
             </div>
             <div class="name_input_wrapper">
@@ -106,7 +107,7 @@ export default Vue.extend({
     .to_research_wrapper{
         margin-right: 20px;
     }
-    .to_research_wrapper:hover{
+    .to_research_wrapper span:hover{
         opacity: 0.9;
     }
     .to_research_wrapper span{
