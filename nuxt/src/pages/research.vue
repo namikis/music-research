@@ -6,9 +6,26 @@
             <h1 style="color: white;">実験用リンク</h1>
             <div class="research_items">
                 <div class="research_item">
-                  <a href="/research/introduction.pdf" target="_blank">手順書</a>
                   <a href="https://docs.google.com/forms/d/e/1FAIpQLScDfsFRKLGLBAMaokk8dte9ai36PEZqzJ-2UxHkP_Wgkno2ug/viewform?usp=sf_link" target="_blank">アンケート</a>
                   <a href="https://open.spotify.com/" target="_blank">Spotify</a>
+                </div>
+                <div class="research_item">
+                  <h1>
+                    手順
+                    <span
+                     v-if="open_state == 1" 
+                     @click="changeState"
+                     class="state_icon"
+                    >🔻</span>
+                    <span
+                     v-else
+                     @click="changeState"
+                     class="state_icon"
+                     >🔺</span>
+                  </h1>
+                  <Introduction 
+                    v-if="open_state !== 1"
+                  />                  
                 </div>
                 <div class="research_item">
                   <h1>動画１（Spotify）</h1>
@@ -36,7 +53,17 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'IndexPage'
+  name: 'IndexPage',
+  data(){
+    return {
+      open_state: 1
+    }
+  },
+  methods:{
+    changeState(){
+      this.open_state *= -1
+    }
+  }
 
 })
 </script>
@@ -44,7 +71,7 @@ export default Vue.extend({
   .research_container{
     display: flex;
     background: black;
-    height: 150vh;
+    height: 300vh;
   }
   .research_wrapper{
     width: 60%;
@@ -55,7 +82,7 @@ export default Vue.extend({
     margin: 10px;
   }
   .research_item{
-      margin: 30px 0;
+      margin: 60px 0;
   }
   .research_item a{
       padding: 5px;
@@ -67,6 +94,13 @@ export default Vue.extend({
   }
   .research_item h1{
     color: white;
-    margin: 60px 0;
+    margin: 30px 0;
+  }
+  video {
+    width: 100%;
+  }
+  .state_icon{
+    color: black;
+    cursor: pointer;
   }
 </style>
