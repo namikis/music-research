@@ -1,6 +1,15 @@
+require('dotenv').config()
+const {
+  AUTH_PASS,
+} = process.env;
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
+
+  env:{
+    AUTH_PASS,
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -34,6 +43,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
+    '@nuxtjs/dotenv'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

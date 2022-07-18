@@ -4,11 +4,7 @@
           <div class="message_item">
               <h2 class="intro_title">実験概要</h2>
               <div class="message_field">
-                  <p>・「Spotify」「FUSION MUSIC」の二つのシステムを使用し、気に入った曲をそれぞれ三曲ずつ見つける（メモしておく）</p>
-                  <p>・時間は無制限</p>
-                  <p>・知っている曲・知らない曲どちらでも良い</p>
-                  <p class="message_accent">・Spotify使用時は画面録画をする</p>
-                  <p class="message_accent">・検索結果からではなく提案内容から曲を選択する</p>
+                  <p>・「Spotify」「FUSION MUSIC」の二つのシステムを使用し、お気に入り曲をそれぞれ三曲ずつ選択する（メモしておく）</p>
               </div>
           </div>
           <div class="message_item">
@@ -22,7 +18,7 @@
                   <p>
                     ４．使い方説明用動画②<br>
                     ５．システム②を自由に使用してお気に入り曲三つを決定する<br>
-                    ６．アンケート②
+                    ６．アンケート②（①と同じアンケート）
                   </p>
               </div>
           </div>
@@ -46,6 +42,8 @@ export default Vue.extend({
         background: white;
         padding: 40px;
         border-radius: 10px;
+        width: 90%;
+        margin: 0 auto;
     }
     .message_wrapper{
         width: 80%;

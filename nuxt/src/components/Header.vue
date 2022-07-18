@@ -37,6 +37,7 @@ export default Vue.extend({
     mounted(){
         if(!this.$cookies.get("user_name")){
             this.$cookies.set("user_name", "")
+            this.$cookies.set("state", "none")
         }else{
             this.user_name = this.$cookies.get("user_name")
         }
@@ -46,11 +47,27 @@ export default Vue.extend({
             this.user_name = this.target_user_name
             this.$cookies.set("user_name", this.user_name)
             console.log(this.user_name)
+            this.setState();
         },
         deleteUserName(){
             this.user_name = ""
             this.$cookies.set("user_name", "")
+            this.$cookies.set("state", "none")
         },
+        setState(){
+            const target_array = this.user_name.split("-")
+            let state = "none"
+            if(this.user_name == "root"){
+                state = "a"
+            }else if(
+                target_array.length == 2 
+                || target_array[1] == "sf"
+                || target_array[1] == "fs"
+            ){
+                state = target_array[1][0]
+            }
+            this.$cookies.set("state", state)
+        }, 
         toResearch(){
             this.$router.push("/research")
         },
